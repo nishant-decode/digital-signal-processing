@@ -1,0 +1,18 @@
+wp = input( 'Enter the Pass band edge in radians = '); ws = input('Enter the Stop band edge in radians = '); wt = ws-wp;
+n1 = ceil (8*pi/wt);
+N = n1 + rem(n1-1, 2);
+disp('order of the FIR filter N = '); disp(N);
+wn = (hamming(N));
+Wc1 = wp + wt/2 ;
+Wc = Wc1/pi;
+disp(' cut off frequency = '); disp(Wc);
+h = fir1(N-1,Wc, wn);
+disp('Impulse Response of FIR filter='); disp(h);
+figure(1);
+freqz(h);
+figure(2);
+n = 0:1:N-1;
+stem(n,h);
+xlabel('n');
+ylabel('h(n)');
+title('Impulse Response of Filter');
